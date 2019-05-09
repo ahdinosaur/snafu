@@ -75,6 +75,8 @@ pub use snafu_derive::Snafu;
 
 pub mod guide;
 
+pub mod futures_std;
+
 /// Ensure a condition is true. If it is not, return from the function
 /// with an error.
 ///
@@ -590,4 +592,12 @@ mod backtrace_shim {
             Ok(())
         }
     }
+}
+
+#[allow(missing_docs)] // FIXME
+pub trait IntoError {
+    type SourceError; // std::error::Error ?
+    type Error: std::error::Error; // ?
+
+    fn into_error(self, error: Self::SourceError) -> Self::Error;
 }

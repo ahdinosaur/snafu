@@ -36,6 +36,7 @@ exclude = [
   "compatibility-tests/v1_34",
   "compatibility-tests/v1_30",
   "compatibility-tests/v1_18",
+  "compatibility-tests/futures-std",
   "compatibility-tests/without-backtrace",
 ]
 
