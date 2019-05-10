@@ -845,12 +845,12 @@ impl<'a> quote::ToTokens for BorrowImpl<'a> {
 
         stream.extend({
             quote! {
-                impl#original_generics std::borrow::Borrow<std::error::Error> for std::boxed::Box<#parameterized_enum_name>
+                impl#original_generics std::borrow::Borrow<std::error::Error + std::marker::Send + std::marker::Sync> for std::boxed::Box<#parameterized_enum_name>
                 where
-                    Self: std::error::Error + 'static,
+                    Self: std::error::Error + std::marker::Send + std::marker::Sync + 'static,
                     #(#where_clauses),*
                 {
-                    fn borrow(&self) -> &(std::error::Error + 'static) {
+                    fn borrow(&self) -> &(std::error::Error + std::marker::Send + std::marker::Sync + 'static) {
                         self
                     }
                 }
